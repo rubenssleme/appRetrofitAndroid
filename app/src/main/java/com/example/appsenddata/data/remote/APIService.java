@@ -6,40 +6,33 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-/**
- * Created by Chike on 12/3/2016.
- */
 
 public interface APIService {
 
-    @POST("/produto")
+    @Headers({"Content-Type:application/json"})
+    @POST("produto")
     @FormUrlEncoded
     Call<Produto> saveProduto(@Field("nome") String nome,
-                           @Field("quantidade") String quantidade,
-                           @Field("valor") String valor);
+                                 @Field("quantidade") int quantidade,
+                                 @Field("valor") double valor);
 
-    // RxJava
-   /* @POST("/posts")
-    @FormUrlEncoded
-    Observable<Produto> savePost(@Field("title") String title,
-                              @Field("body") String body,
-                              @Field("userId") long userId);*/
+   @POST("produto")
+    Call<Produto> salvarProduto(@Body Produto produto);
 
-    @POST("/posts")
-    Call<Produto> saveProduto(@Body Produto post);
-
-    @PUT("/posts/{id}")
+    @PUT("produto/{id}")
     @FormUrlEncoded
     Call<Produto> updateProduto(@Path("id") long id,
                           @Field("nome") String nome,
                           @Field("quantidade") String quantidade,
                           @Field("valor") String String);
 
-    @DELETE("/posts/{id}")
+    @DELETE("produto/{id}")
     Call<Produto> deleteProduto(@Path("id") long id);
+
 
 }
